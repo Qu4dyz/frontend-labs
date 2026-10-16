@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Форма зворотного зв'язку інтернет-магазину SmartLine.">
+  <title>SmartLine — Зворотній зв'язок</title>
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+</head>
+<body>
+
+  <header>
+    <img src="images/logo.svg" alt="Логотип SmartLine" width="80" height="80">
+    <h1>SmartLine</h1>
+    <nav>
+      <a href="index.html">Головна</a> |
+      <a href="catalog.html">Каталог</a>
+    </nav>
+  </header>
+
+  <main>
+    <h2>Зворотній зв'язок</h2>
+    <p>Заповніть форму, і наш менеджер відповість вам протягом одного робочого дня.</p>
+
+    <form action="#" method="post" name="feedback">
+
+      <fieldset>
+        <legend>Персональна інформація</legend>
+
+        <p>
+          <label for="fullname">Прізвище та ім'я:</label><br>
+          <input type="text" id="fullname" name="fullname" placeholder="Шевченко Тарас" size="40" maxlength="60" required autofocus>
+        </p>
+
+        <p>
+          <label for="email">E-mail:</label><br>
+          <input type="email" id="email" name="email" placeholder="name@example.com" size="40" required>
+        </p>
+
+        <p>
+          <label for="age">Вік:</label><br>
+          <input type="number" id="age" name="age" min="14" max="100" step="1" placeholder="18">
+        </p>
+
+        <p>Освіта:</p>
+        <p>
+          <input type="radio" id="edu-full" name="education" value="full" checked>
+          <label for="edu-full">повна</label><br>
+          <input type="radio" id="edu-incomplete" name="education" value="incomplete">
+          <label for="edu-incomplete">неповна</label><br>
+          <input type="radio" id="edu-higher" name="education" value="higher">
+          <label for="edu-higher">вища</label><br>
+          <input type="radio" id="edu-professional" name="education" value="professional">
+          <label for="edu-professional">професійна</label>
+        </p>
+      </fieldset>
+
+      <p>
+        <label for="purpose">Мета зворотнього зв'язку:</label><br>
+        <select id="purpose" name="purpose" required>
+          <option value="" disabled selected>— оберіть мету —</option>
+          <option value="cooperation">співпраця</option>
+          <option value="copyright">скарга на порушення права власності</option>
+          <option value="proposal">пропозиція</option>
+          <option value="error">наявність помилки</option>
+        </select>
+      </p>
+
+      <p>
+        <label for="details">Детально:</label><br>
+        <textarea id="details" name="details" rows="6" cols="60" maxlength="500" placeholder="Опишіть ваше питання (до 500 символів)" style="resize:none;"></textarea>
+      </p>
+
+      <p>
+        <input type="checkbox" id="consent" name="consent" value="yes" required>
+        <label for="consent">Я даю згоду на обробку моїх персональних даних</label>
+      </p>
+
+      <p>
+        <button type="submit">Надіслати</button>
+        <button type="reset">Очистити форму</button>
+      </p>
+
+    </form>
+  </main>
+
+  <footer>
+    <p><small>&copy; 2026 SmartLine</small></p>
+  </footer>
+
+</body>
+</html>

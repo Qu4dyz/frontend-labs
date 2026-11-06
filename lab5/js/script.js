@@ -39,10 +39,10 @@ function initFallingPhones() {
   layer.setAttribute("aria-hidden", "true");
   header.prepend(layer);
 
-  const maxHeight = Math.floor(2 * capitalLetterHeight(title)); // не більше подвоєної висоти великої літери
-  header.dataset.maxPhoneHeight = maxHeight;
-
   function dropPhone() {
+    // вимірюємо щоразу: після завантаження веб-шрифту висота літери може змінитися
+    const maxHeight = Math.floor(2 * capitalLetterHeight(title)); // не більше подвоєної висоти великої літери
+    header.dataset.maxPhoneHeight = maxHeight;
     const img = document.createElement("img");
     img.src = CATALOG_IMAGES[Math.floor(Math.random() * CATALOG_IMAGES.length)];
     img.alt = "";

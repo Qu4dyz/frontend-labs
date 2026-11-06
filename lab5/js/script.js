@@ -119,6 +119,9 @@ function initSearch() {
   const count = document.getElementById("search-count");
   const empty = document.getElementById("search-empty");
 
+  // обробник через властивість DOM-об'єкта: при фокусі виділяємо введений запит
+  input.onfocus = () => input.select();
+
   input.addEventListener("input", () => {
     const query = input.value.trim().toLowerCase();
     let shown = 0;

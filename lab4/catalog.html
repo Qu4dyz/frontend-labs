@@ -42,7 +42,8 @@
 
     <p class="search">
       <label for="search">Пошук товару за назвою:</label>
-      <input type="search" id="search" placeholder="Наприклад, Galaxy" autocomplete="off">
+      <input type="search" id="search" placeholder="Наприклад, Galaxy" autocomplete="off"
+             onkeydown="if (event.key === 'Escape') { this.value = ''; this.dispatchEvent(new Event('input')); }">
       <span id="search-count" aria-live="polite"></span>
     </p>
     <p id="search-empty" hidden>За вашим запитом товарів не знайдено.</p>

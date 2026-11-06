@@ -11,8 +11,8 @@ class User {
   #requestDate; // приватне поле: дата та час звернення як об'єкт Date
 
   constructor(surname, name, age, education, purpose, date, time) {
-    this.surname = surname;
-    this.name = name;
+    this.surname = surname.trim();
+    this.name = name.trim();
     this.age = age;
     this.education = education;
     this.purpose = purpose;
@@ -80,12 +80,19 @@ class UserRegistry {
       "Інші": [],
     };
     for (const u of this.users) {
-      if (u.isWorkingTime() && u.purpose === PURPOSE.COMPLAINT) {
-        classes["звернулись з претензією у робочий час"].push(u);
-      } else if (u.isWorkingTime() && u.purpose === PURPOSE.PROPOSAL) {
-        classes["звернулись з побажанням у робочий час"].push(u);
-      } else {
+      if (!u.isWorkingTime()) {
         classes["Інші"].push(u);
+        continue;
+      }
+      switch (u.purpose) {
+        case PURPOSE.COMPLAINT:
+          classes["звернулись з претензією у робочий час"].push(u);
+          break;
+        case PURPOSE.PROPOSAL:
+          classes["звернулись з побажанням у робочий час"].push(u);
+          break;
+        default:
+          classes["Інші"].push(u);
       }
     }
     return classes;

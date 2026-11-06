@@ -19,6 +19,52 @@ const userColumns = [
 
 let currentProducts = [...products];
 
+// Функціональний вираз (function expression): форматування ціни з розділенням розрядів
+const formatPrice = function (value) {
+  return `${Math.round(value).toLocaleString("uk-UA")} грн`;
+};
+
+// Загальна інформація: Math, Date, String та типи даних
+const currentPrices = products.map((p) => p.price3);
+const today = new Date();
+const summary = [
+  ["Товарів у каталозі", String(products.length)],
+  ["Загалом на складі, шт.", String(totalStock(products))],
+  ["Найдешевший товар", formatPrice(Math.min(...currentPrices))],
+  ["Найдорожчий товар", formatPrice(Math.max(...currentPrices))],
+  ["Середня діюча ціна", formatPrice(currentPrices.reduce((s, p) => s + p, 0) / currentPrices.length)],
+  ["Країни (через кому)", [...new Set(products.map((p) => p.country))].join(", ")],
+  ["Артикули брендів Samsung", products.filter((p) => p.name.startsWith("Samsung")).map((p) => p.article.toLowerCase()).join(", ")],
+  ["Дата формування звіту", `${today.toLocaleDateString("uk-UA")} (день місяця: ${today.getDate()}, день тижня: ${today.getDay()})`],
+];
+document.getElementById("summary").innerHTML = table(summary.map(([k, v]) => ({ k, v })), [["k", "Показник"], ["v", "Значення"]]);
+
+const sample = products[0];
+const types = [
+  ["sample.name", sample.name, typeof sample.name],
+  ["sample.price3", sample.price3, typeof sample.price3],
+  ["isComplete(sample)", isComplete(sample), typeof isComplete(sample)],
+  ["sample.discount", sample.discount, typeof sample.discount],
+  ["products", "масив з 10 товарів", typeof products],
+  ["registry", "об'єкт класу UserRegistry", typeof registry],
+  ["today", today.toISOString(), typeof today],
+  ["formatPrice", "функція", typeof formatPrice],
+];
+document.getElementById("types").innerHTML = table(types.map(([e, v, t]) => ({ e, v: String(v), t })), [["e", "Вираз"], ["v", "Значення"], ["t", "typeof"]]);
+console.log("Типи даних:"); console.table(types);
+
+// Явне перетворення типів
+const conversions = [
+  ['Number("52999")', Number("52999")],
+  ["String(52999)", String(52999)],
+  ['parseInt("12 шт.", 10)', parseInt("12 шт.", 10)],
+  ['parseFloat("4.5 дюйма")', parseFloat("4.5 дюйма")],
+  ['Boolean("")', Boolean("")],
+  ["Boolean(products.length)", Boolean(products.length)],
+];
+document.getElementById("conversions").innerHTML = table(conversions.map(([e, v]) => ({ e, v: String(v), t: typeof v })), [["e", "Вираз"], ["v", "Результат"], ["t", "typeof результату"]]);
+console.log("Явне перетворення типів:"); console.table(conversions);
+
 // 1.1
 const sorted = sortByCountry(products);
 document.getElementById("sorted").innerHTML = table(sorted, productColumns);
@@ -43,8 +89,10 @@ document.getElementById("add-form").addEventListener("submit", (e) => {
     ? `Уся інформація наявна - товар «${data.name}» додано на ПОЧАТОК списку.`
     : `Інформація неповна - товар «${data.name || "без назви"}» додано в КІНЕЦЬ списку.`;
   document.getElementById("added").innerHTML = table(currentProducts, productColumns);
+  e.target.elements.id.placeholder = `вільний: ${nextFreeId(currentProducts)}`;
   console.log("1.3 Список після додавання:"); console.table(currentProducts);
 });
+document.getElementById("add-form").elements.id.placeholder = `вільний: ${nextFreeId(products)}`;
 
 // 1.4
 const dyn = priceDynamics(products);

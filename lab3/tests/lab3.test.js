@@ -81,3 +81,15 @@ test("2.4 сортування за спаданням віку та за алф
   assert.equal(registry.sortAlphabetically()[0].surname, "Антоненко");
   assert.equal(registry.sortAlphabetically().at(-1).surname, "Шевчук");
 });
+
+test("додатково: вільний id (do...while), сума на складі (while), перевірка типів", () => {
+  assert.equal(P.nextFreeId(P.products), 11);
+  assert.equal(P.nextFreeId([{ id: 2 }, { id: 3 }]), 1);
+  assert.equal(P.totalStock(P.products), 12 + 8 + 5 + 20 + 7 + 15 + 9 + 3 + 25 + 30);
+  assert.equal(P.totalStock([]), 0);
+  const base = { article: "A1", id: 1, name: "X", country: "США", price1: 1, price2: 2, price3: 3, stock: 1 };
+  assert.equal(P.isComplete(base), true);
+  assert.equal(P.isComplete({ ...base, price2: NaN }), false, "NaN - не число для ціни");
+  assert.equal(P.isComplete({ ...base, stock: "5" }), false, "рядок замість числа");
+  assert.equal(P.isComplete({ ...base, name: "   " }), false, "назва з самих пробілів");
+});

@@ -40,8 +40,36 @@ function findMinPrice2(list) {
 }
 
 // 1.3 Додавання нового запису: неповний - у кінець, повний - на початок списку
+const NUMBER_FIELDS = ["id", "price1", "price2", "price3", "stock"];
+
 function isComplete(product) {
-  return REQUIRED_FIELDS.every((f) => product[f] !== undefined && product[f] !== null && product[f] !== "");
+  return REQUIRED_FIELDS.every((f) => {
+    const value = product[f];
+    if (value === undefined || value === null || value === "") return false;
+    // числові поля мають бути саме числами, текстові - непорожніми рядками
+    if (NUMBER_FIELDS.includes(f)) return typeof value === "number" && !Number.isNaN(value);
+    return typeof value === "string" && value.trim().length > 0;
+  });
+}
+
+// Найменший вільний id для нового товару (цикл з постумовою do...while)
+function nextFreeId(list) {
+  let id = 0;
+  do {
+    id++;
+  } while (list.some((p) => p.id === id));
+  return id;
+}
+
+// Загальна кількість товарів на складі (цикл з передумовою while)
+function totalStock(list) {
+  let sum = 0;
+  let i = 0;
+  while (i < list.length) {
+    sum += list[i].stock;
+    i++;
+  }
+  return sum;
 }
 
 function addProduct(list, product) {
@@ -69,5 +97,5 @@ function priceDynamics(list) {
 }
 
 if (typeof module !== "undefined") {
-  module.exports = { products, sortByCountry, averagePriceByCountry, findMinPrice2, isComplete, addProduct, priceTrend, priceDynamics };
+  module.exports = { products, sortByCountry, averagePriceByCountry, findMinPrice2, isComplete, nextFreeId, totalStock, addProduct, priceTrend, priceDynamics };
 }

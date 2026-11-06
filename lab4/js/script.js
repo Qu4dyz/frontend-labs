@@ -1,4 +1,4 @@
-// SmartLine — клієнтські скрипти (Лабораторна робота 4, варіант 1)
+// SmartLine - клієнтські скрипти (Лабораторна робота 4, варіант 1)
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {

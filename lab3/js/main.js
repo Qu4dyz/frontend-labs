@@ -3,7 +3,7 @@
 function table(rows, columns) {
   const head = columns.map(([, title]) => `<th>${title}</th>`).join("");
   const body = rows
-    .map((r) => `<tr>${columns.map(([key]) => `<td>${typeof key === "function" ? key(r) : r[key] ?? "—"}</td>`).join("")}</tr>`)
+    .map((r) => `<tr>${columns.map(([key]) => `<td>${typeof key === "function" ? key(r) : r[key] ?? "-"}</td>`).join("")}</tr>`)
     .join("");
   return `<table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table>`;
 }
@@ -40,8 +40,8 @@ document.getElementById("add-form").addEventListener("submit", (e) => {
   const complete = isComplete(data);
   currentProducts = addProduct(currentProducts, data);
   document.getElementById("add-msg").textContent = complete
-    ? `Уся інформація наявна — товар «${data.name}» додано на ПОЧАТОК списку.`
-    : `Інформація неповна — товар «${data.name || "без назви"}» додано в КІНЕЦЬ списку.`;
+    ? `Уся інформація наявна - товар «${data.name}» додано на ПОЧАТОК списку.`
+    : `Інформація неповна - товар «${data.name || "без назви"}» додано в КІНЕЦЬ списку.`;
   document.getElementById("added").innerHTML = table(currentProducts, productColumns);
   console.log("1.3 Список після додавання:"); console.table(currentProducts);
 });
@@ -67,7 +67,7 @@ showMonth("2026-10", "2026-10-20T12:00");
 // 2.2
 const age = registry.educationForAverageAge();
 document.getElementById("age").textContent = age.matches.length
-  ? `Середній вік: ${age.average}. Співпадає з віком: ${age.matches.map((u) => `${u.fullName} — освіта: ${u.education}`).join("; ")}.`
+  ? `Середній вік: ${age.average}. Співпадає з віком: ${age.matches.map((u) => `${u.fullName} - освіта: ${u.education}`).join("; ")}.`
   : `Середній вік: ${age.average}. Користувачів з таким віком немає.`;
 console.log("2.2 Середній вік:", age);
 

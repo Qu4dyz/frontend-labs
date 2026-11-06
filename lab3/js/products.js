@@ -39,7 +39,7 @@ function findMinPrice2(list) {
   return { id: min.id, name: min.name, price2: min.price2 };
 }
 
-// 1.3 Додавання нового запису: неповний — у кінець, повний — на початок списку
+// 1.3 Додавання нового запису: неповний - у кінець, повний - на початок списку
 function isComplete(product) {
   return REQUIRED_FIELDS.every((f) => product[f] !== undefined && product[f] !== null && product[f] !== "");
 }

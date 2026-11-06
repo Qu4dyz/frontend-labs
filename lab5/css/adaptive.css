@@ -1,5 +1,5 @@
 /* =========================================================
-   SmartLine — адаптивність та кросбраузерність (Лабораторна робота 5)
+   SmartLine - адаптивність та кросбраузерність (Лабораторна робота 5)
    Підключається після style.css
    ========================================================= */
 
@@ -125,7 +125,7 @@ video {
   box-shadow: 0 4px 0.875rem rgba(0, 100, 0, 0.3);
 }
 
-/* смуга прокручування блоку #about: Firefox — scrollbar-color (style.css), Chrome/Edge/Safari/Opera — ::-webkit-scrollbar */
+/* смуга прокручування блоку #about: Firefox - scrollbar-color (style.css), Chrome/Edge/Safari/Opera - ::-webkit-scrollbar */
 #about::-webkit-scrollbar {
   width: 0.5rem;
 }
@@ -287,7 +287,7 @@ video {
     padding-top: 0.75rem;
   }
 
-  /* на смартфоні вертикальне меню праворуч під логотипом, кнопки — на всю ширину */
+  /* на смартфоні вертикальне меню праворуч під логотипом, кнопки - на всю ширину */
   .page-home #main-nav.nav--vertical {
     position: static;
     float: right;

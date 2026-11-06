@@ -26,7 +26,7 @@ test("1.2 мінімальна вартість2_недіюча → id", () => {
   assert.equal(P.findMinPrice2([]), null);
 });
 
-test("1.3 повний запис додається на початок, неповний — у кінець", () => {
+test("1.3 повний запис додається на початок, неповний - у кінець", () => {
   const full = { article: "MTG85T128", id: 11, name: "Motorola G85", country: "США", price1: 9999, price2: 9499, price3: 8999, stock: 4 };
   const partial = { article: "HNR400X", id: 12, name: "Honor 400", country: "", price1: 19999, price2: 18999, price3: 17999, stock: 2 };
   const a = P.addProduct(P.products, full);
@@ -41,7 +41,7 @@ test("1.4 динаміка цін", () => {
   assert.equal(P.priceTrend({ price1: 3, price2: 2, price3: 1 }), "стабільно дешевшає");
   assert.equal(P.priceTrend({ price1: 1, price2: 2, price3: 3 }), "стабільно дорожчає");
   assert.equal(P.priceTrend({ price1: 1, price2: 3, price3: 2 }), "не стабільні зміни");
-  assert.equal(P.priceTrend({ price1: 2, price2: 2, price3: 1 }), "не стабільні зміни", "рівні ціни — не монотонна послідовність");
+  assert.equal(P.priceTrend({ price1: 2, price2: 2, price3: 1 }), "не стабільні зміни", "рівні ціни - не монотонна послідовність");
   const trends = P.priceDynamics(P.products).map((d) => d.trend);
   assert.equal(trends.filter((t) => t === "стабільно дешевшає").length, 4);
   assert.equal(trends.filter((t) => t === "стабільно дорожчає").length, 3);
@@ -71,7 +71,7 @@ test("2.3 три класи за часом і метою звернення", (
     "Інші": 6,
   });
   const edge = new User("Межа", "Час", 30, "вища", PURPOSE.COMPLAINT, "2026-10-01", "18:00");
-  assert.equal(edge.isWorkingTime(), true, "18:00 — ще робочий час");
+  assert.equal(edge.isWorkingTime(), true, "18:00 - ще робочий час");
   assert.equal(new User("Межа", "Час", 30, "вища", PURPOSE.COMPLAINT, "2026-10-01", "08:59").isWorkingTime(), false);
 });
 

@@ -1,4 +1,4 @@
-// SmartLine — клієнтські скрипти (Лабораторна робота 4, варіант 1)
+// SmartLine - клієнтські скрипти (Лабораторна робота 4, варіант 1)
 "use strict";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /* ---------- 1. Головна: падаючі зображення товарів на фоні блоку з назвою ---------- */
-// ЛР5: зменшені копії фото з каталогу (96 px, WebP) — замість повнорозмірних 400 px
+// ЛР5: зменшені копії фото з каталогу (96 px, WebP) - замість повнорозмірних 400 px
 const CATALOG_IMAGES = [
   "iphone-16-pro", "galaxy-s25", "pixel-9", "xiaomi-14", "oneplus-13", "motorola-edge-50", "nothing-phone-3a", "sony-xperia-1",
 ].map((name) => `images/thumbs/${name}.webp`);

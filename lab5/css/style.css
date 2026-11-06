@@ -1,0 +1,737 @@
+/* =========================================================
+   SmartLine — зовнішня таблиця стилів (Лабораторна робота 2)
+   Стиль веб-дизайну: мінімалізм
+   ========================================================= */
+
+/* ---------- Базові стилі (селектор елементу) ---------- */
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Montserrat", Arial, sans-serif;           /* шрифт 1 */
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #1f2937;                                         /* колір: HEX */
+  background: linear-gradient(180deg, #f8fafc 0%, hsl(150, 30%, 96%) 100%); /* фон: градієнт */
+}
+
+h1, h2, h3 {
+  font-family: "Merriweather", Georgia, serif;            /* шрифт 2 */
+  font-weight: 400;
+  line-height: 1.3;
+  color: darkgreen;                                       /* колір: назва */
+}
+
+a {
+  color: rgb(13, 110, 70);                                /* колір: RGB */
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: hsl(152, 70%, 22%);                              /* колір: HSL */
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: hsl(48, 100%, 70%);
+  color: #111827;
+}
+
+/* ---------- Шапка (клас + комбінатор-нащадок «пробіл») ---------- */
+.site-header {
+  background-color: white;
+  border-bottom: 1px solid hsl(150, 20%, 85%);
+  padding: 0.75rem 2rem;
+  z-index: 10;
+}
+
+.site-header .logo {
+  float: left;                                            /* float */
+  margin-right: 1rem;
+  animation: logo-pop 1.2s ease-out both;                 /* анімація */
+  transition: transform 0.4s ease;
+}
+
+.site-header .logo:hover {
+  transform: rotate(-12deg) scale(1.08);                  /* 2D-трансформація */
+}
+
+.site-header h1 {
+  margin: 0.5rem 0 0;
+  font-size: 2rem;
+}
+
+.site-header p {
+  margin: 0;
+  color: #6b7280;
+}
+
+/* комбінатор дочірнього елементу «>» */
+.site-header > nav ul {
+  display: flex;                                          /* display */
+  gap: 1.5rem;
+  list-style: none;
+  margin: 0.75rem 0;
+  padding: 0;
+  clear: both;
+}
+
+.site-header > nav a {
+  font-weight: 600;
+  padding: 4px 0;
+  border-bottom: 2px solid transparent;
+}
+
+.site-header > nav a:hover {
+  border-bottom-color: darkgreen;
+  text-decoration: none;
+}
+
+@keyframes logo-pop {
+  0%   { opacity: 0; transform: scale(0.6) rotate(-30deg); }
+  70%  { opacity: 1; transform: scale(1.1) rotate(5deg); }
+  100% { transform: scale(1) rotate(0); }
+}
+
+/* ---------- Кнопки: перехід між двома стилями (5 властивостей) ---------- */
+.btn {
+  display: inline-block;
+  font: 600 0.9375rem "Montserrat", Arial, sans-serif;
+  padding: 0.625rem 1.25rem;
+  margin: 4px 0.5rem 4px 0;
+  border-radius: 62.4375rem;
+  border: 2px solid darkgreen;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s, box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+}
+
+.btn-primary {
+  background-color: darkgreen;
+  color: white;
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: darkgreen;
+}
+
+.btn:hover {
+  background-color: hsl(48, 100%, 60%);
+  color: #111827;
+  border-color: hsl(48, 100%, 45%);
+  box-shadow: 0 0.375rem 1rem rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+/* ---------- Селектори атрибутів ---------- */
+[title] {
+  cursor: help;
+}
+
+button[title],
+a[title] {
+  cursor: pointer;
+}
+
+a[href^="http"]::after {                                  /* [атрибут^="значення"] */
+  content: " ↗";
+  font-size: 0.8em;
+}
+
+a[href*="tel:"] {                                         /* [атрибут*="значення"] */
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+/* ---------- Картки контенту ---------- */
+.card {
+  position: relative;                                     /* position: relative */
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 0.625rem rgba(15, 23, 42, 0.06);
+}
+
+/* ============ ГОЛОВНА СТОРІНКА (Grid) ============ */
+.page-home {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 17.5rem;
+  grid-template-areas:
+    "main  aside"
+    "footer footer";
+  column-gap: 2rem;
+  padding: 14.375rem 2rem 0;                                  /* місце під абсолютну шапку */
+}
+
+/* Вимога варіанту: блок з назвою та логотипом абсолютно позиціонований з 0 відступом зверху */
+.page-home .site-header {
+  position: absolute;                                     /* position: absolute */
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.page-home main {
+  grid-area: main;
+}
+
+.page-home aside {
+  grid-area: aside;
+  position: sticky;                                       /* position: sticky */
+  top: 1rem;
+  align-self: start;
+  background: hsl(150, 40%, 94%);
+  border-radius: 1rem;
+  padding: 1rem 1.25rem;
+}
+
+.page-home aside h2 {
+  font-size: 1.25rem;
+  margin-top: 0;
+}
+
+/* Вимога варіанту: блок мети має більші зовнішні відступи, ніж внутрішні */
+#about {
+  margin: 2.5rem 0;
+  padding: 1rem 1.25rem;
+  max-height: 21.25rem;
+  overflow-y: auto;                                       /* смуга прокрутки з’являється, коли текст не вміщується */
+  scrollbar-color: darkgreen hsl(150, 30%, 92%);
+}
+
+#about ol li::marker {
+  color: darkgreen;
+  font-weight: 800;
+}
+
+/* комбінатор «~»: усі абзаци після списку завдань */
+#about ol ~ p {
+  border-top: 1px dashed hsl(150, 20%, 80%);
+  padding-top: 0.5rem;
+}
+
+.slogan {
+  color: darkgreen;
+  font-weight: 600;
+}
+
+/* Вимога варіанту: при наведенні блок з таблицею зміщується вгору на 2% від його величини */
+#products {
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+#products:hover {
+  transform: translateY(-2%);
+  box-shadow: 0 0.75rem 1.5rem rgba(15, 23, 42, 0.12);
+}
+
+#products table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+}
+
+#products caption {
+  font-family: "Merriweather", Georgia, serif;
+  font-style: italic;
+  margin-bottom: 0.5rem;
+}
+
+#products th,
+#products td {
+  border: 1px solid hsl(150, 15%, 80%);
+  padding: 0.375rem 0.625rem;
+}
+
+#products thead th,
+#products tfoot th {
+  background: darkgreen;
+  color: white;
+}
+
+#products tbody tr:nth-child(even) {
+  background: hsl(150, 30%, 97%);
+}
+
+#reviews {
+  padding: 1rem 1.25rem;
+  margin-bottom: 2rem;
+}
+
+#reviews blockquote {
+  margin: 0.75rem 0;
+  padding: 0.5rem 1rem;
+  border-left: 4px solid hsl(48, 100%, 55%);
+  background: #f9fafb;
+}
+
+/* Підвал */
+.page-home footer {
+  grid-area: footer;
+  margin: 0 -2rem;
+  padding: 1.5rem 2rem;
+  background: #0f2e1f;
+  color: #e5e7eb;
+}
+
+.page-home footer h2 {
+  color: white;
+  margin-top: 0;
+}
+
+.page-home footer a {
+  color: hsl(48, 100%, 70%);
+}
+
+/* Вимога варіанту: при виділенні тексту адреси та телефонів шрифт і фон
+   через 2 с підсилюються на 10% від заданих */
+address {
+  display: inline-block;
+  font-style: normal;
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  background-color: hsl(150, 40%, 25%);
+  transition: font-size 0.5s ease 2s, background-color 0.5s ease 2s;
+}
+
+address:active,
+address:focus {
+  outline: none;
+  font-size: 1.1rem;                                      /* +10% */
+  background-color: hsl(150, 40%, 22.5%);                 /* фон насиченіший на 10% */
+}
+
+address::selection,
+address *::selection {
+  background: hsl(48, 100%, 60%);
+  color: #111827;
+}
+
+/* ============ КАТАЛОГ (Grid) ============ */
+/* Вимога варіанту: блок з назвою та логотипом фіксований зверху */
+.site-header--fixed {
+  position: fixed;                                        /* position: fixed */
+  top: 0;
+  left: 0;
+  right: 0;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas:
+    "logo title button"
+    "logo nav   button";
+  align-items: center;
+  column-gap: 1rem;
+  box-shadow: 0 2px 0.75rem rgba(0, 0, 0, 0.08);
+}
+
+.site-header--fixed .logo {
+  grid-area: logo;
+  float: none;
+  width: 4rem;
+  height: 4rem;
+  margin: 0;
+}
+
+.site-header--fixed h1 { grid-area: title; margin: 0; font-size: 1.625rem; }
+.site-header--fixed > p { display: none; }
+.site-header--fixed form { grid-area: button; }
+
+.catalog-nav {
+  grid-area: nav;
+  display: flex;
+  gap: 1.25rem;
+}
+
+.catalog-nav a {
+  color: hsl(205, 75%, 38%);
+  font-weight: 600;
+}
+
+/* Вимога варіанту: вже відвідані посилання мають темно-зелений колір */
+.page-catalog a:visited {
+  color: darkgreen;
+}
+
+.page-catalog picture img {
+  display: block;
+}
+
+.page-catalog main {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.products {
+  list-style: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16.25rem, 1fr));
+  gap: 1.5rem;
+}
+
+/* Вимога варіанту: рамка темно-зеленого кольору, верхня межа крапкова,
+   решта меж суцільні та тонкі, тінь всередину рамки */
+.product {
+  height: 100%;
+  padding: 1rem;
+  background: white;
+  border: 1px solid darkgreen;
+  border-top: 3px dotted darkgreen;
+  border-radius: 0.5rem;
+  box-shadow: inset 0 0 0.75rem rgba(0, 100, 0, 0.25);
+}
+
+.product figure {
+  margin: 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Вимога варіанту: при наведенні фото анімується до «імітації старовинного зображення» */
+.product img {
+  width: 12.5rem;
+  height: 12.5rem;
+  object-fit: contain;
+  transition: filter 1.2s ease, transform 1.2s ease;
+}
+
+.product img:hover {
+  filter: sepia(1) contrast(0.9) brightness(0.95) blur(0.3px);
+  transform: scale(1.04) rotate(-1deg);
+  animation: old-photo 1.2s ease;
+}
+
+@keyframes old-photo {
+  0%   { filter: none; }
+  50%  { filter: sepia(0.6) grayscale(0.3); }
+  100% { filter: sepia(1) contrast(0.9) brightness(0.95) blur(0.3px); }
+}
+
+/* Вимога варіанту: назва товару має більшу вагу та висоту гліфів, ніж опис, і є похилою */
+.product figcaption b {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 1.375rem;
+  font-weight: 800;
+  font-style: italic;
+}
+
+.product p,
+.product li {
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+
+.product ul {
+  padding-left: 1.25rem;
+}
+
+#map iframe {
+  width: 100%;
+  border: 0;
+  border-radius: 0.75rem;
+}
+
+.page-catalog footer,
+.page-feedback footer {
+  text-align: center;
+  padding: 1.5rem;
+  color: #6b7280;
+}
+
+/* ============ ЗВОРОТНІЙ ЗВ'ЯЗОК (Flex) ============ */
+.page-feedback .site-header {
+  position: relative;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.page-feedback .site-header .logo {
+  float: none;
+  margin: 0;
+}
+
+.page-feedback .site-header nav {
+  margin-left: auto;
+}
+
+.page-feedback main {
+  max-width: 60rem;
+  margin: 2rem auto;
+  padding: 0 1.5rem;
+}
+
+/* flex-контейнер */
+.feedback-form {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: flex-start;
+  gap: 1rem 1.5rem;
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 0.625rem rgba(15, 23, 42, 0.06);
+}
+
+.feedback-form fieldset {
+  order: 1;
+  flex: 1 1 100%;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0 1.5rem;
+  border: 2px solid darkgreen;
+  border-radius: 0.75rem;
+  padding: 0.5rem 1.25rem 1rem;
+}
+
+.feedback-form fieldset > p {
+  flex: 1 1 16.25rem;
+  margin: 0.5rem 0;
+}
+
+.feedback-form legend {
+  font-family: "Merriweather", Georgia, serif;
+  color: darkgreen;
+  padding: 0 0.5rem;
+}
+
+.feedback-form .label-edu {
+  flex: 0 0 100%;
+  margin-bottom: 0;
+}
+
+.feedback-form .edu-options {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 0.75rem;
+}
+
+.feedback-form .edu-options br {
+  display: none;
+}
+
+/* flex-елементи */
+.field--purpose {
+  order: 2;
+  flex: 1 1 17.5rem;
+  align-self: flex-start;
+}
+
+.field--details {
+  order: 3;
+  flex: 2 1 100%;
+}
+
+.field--consent {
+  order: 4;
+  flex-grow: 1;
+  align-self: center;
+}
+
+.actions {
+  order: 5;
+  flex-shrink: 0;
+  align-self: flex-end;
+}
+
+.feedback-form input[type="text"],
+.feedback-form input[type="email"],
+.feedback-form input[type="number"],
+.feedback-form select,
+.feedback-form textarea {
+  width: 100%;
+  font: inherit;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid hsl(150, 15%, 75%);
+  border-radius: 0.5rem;
+  background: #f9fafb;
+}
+
+.feedback-form textarea {
+  max-width: 100%;
+}
+
+.feedback-form input:focus,
+.feedback-form select:focus,
+.feedback-form textarea:focus {
+  outline: 2px solid hsl(48, 100%, 55%);
+  border-color: darkgreen;
+}
+
+/* комбінатор «+»: підпис одразу після обов’язкового поля */
+input:required + label::after {
+  content: " *";
+  color: crimson;
+}
+
+/* =========================================================
+   Лабораторна робота 4 — стилі для динамічних елементів
+   ========================================================= */
+
+/* 1. Падаючі зображення товарів на фоні шапки */
+.page-home .site-header {
+  overflow: hidden;
+}
+
+.falling-layer {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.page-home .site-header > :not(.falling-layer) {
+  position: relative;
+  z-index: 1;
+}
+
+.falling-phone {
+  position: absolute;
+  top: 0;
+  width: auto;
+  will-change: transform;
+}
+
+/* 5. Навігаційне меню: горизонтальне зверху / вертикальне праворуч */
+.page-home #main-nav.nav--horizontal ul {
+  flex-direction: row;
+}
+
+.page-home #main-nav.nav--vertical {
+  position: absolute;
+  top: 0.75rem;
+  right: 1rem;
+}
+
+.page-home #main-nav.nav--vertical ul {
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0.625rem 0.875rem;
+  background: hsl(150, 40%, 96%);
+  border-right: 4px solid darkgreen;
+  border-radius: 0.5rem;
+}
+
+/* 2. «Новинка!» */
+.new-badge {
+  display: inline-block;
+  color: red;
+  font-size: 1.375rem;            /* такий самий кегль, як у назви товару */
+  font-weight: 800;
+  transform: scaleX(1.2);     /* ширина гліфа у 1,2 рази більша */
+  transform-origin: left center;
+  margin-left: 4px;
+  white-space: nowrap;
+}
+
+.new-badge.typing::after {
+  content: "|";
+  animation: caret 0.7s steps(1) infinite;
+}
+
+@keyframes caret {
+  50% { opacity: 0; }
+}
+
+/* 3. Пошук у каталозі */
+.search {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.search input {
+  font: inherit;
+  padding: 0.5rem 0.875rem;
+  min-width: 17.5rem;
+  border: 1px solid hsl(150, 15%, 75%);
+  border-radius: 62.4375rem;
+}
+
+#search-count {
+  color: #6b7280;
+}
+
+/* 4. Поле «Детально» та підказка */
+.details-wrapper {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.feedback-form textarea {
+  transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+
+.feedback-form textarea.is-hovered {
+  background-color: hsl(48, 100%, 95%);
+  border: 2px solid darkgreen;
+  box-shadow: 0 4px 0.875rem rgba(0, 100, 0, 0.3);
+}
+
+.tooltip {
+  flex: 0 0 13.75rem;
+  padding: 0.625rem 0.875rem;
+  background: darkgreen;
+  color: white;
+  font-size: 0.875rem;
+  border-radius: 0.5rem;
+  position: relative;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateX(-8px);
+  transition: opacity 0.3s, transform 0.3s, visibility 0.3s;
+}
+
+.tooltip::before {
+  content: "";
+  position: absolute;
+  left: -8px;
+  top: 1rem;
+  border: 0.5rem solid transparent;
+  border-left: 0;
+  border-right-color: darkgreen;
+}
+
+.tooltip.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(0);
+}
+
+/* вертикальне меню праворуч не перекриває кнопки */
+.page-home .site-header.has-vertical-nav {
+  padding-right: 15rem;
+}
+
+/* «Новинка!» праворуч у рядку з назвою товару */
+.product figcaption b {
+  display: inline;
+}
+
+.product figcaption {
+  margin-top: 0.5rem;
+  line-height: 1.4;
+}

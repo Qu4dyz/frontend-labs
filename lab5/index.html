@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="SmartLine — інтернет-магазин смартфонів: флагмани, середній клас та бюджетні моделі з офіційною гарантією.">
+  <meta name="keywords" content="смартфони, телефони, інтернет-магазин, iPhone, Samsung, Xiaomi">
+  <meta name="author" content="SmartLine">
+  <title>SmartLine — Головна сторінка</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- шрифти завантажуються асинхронно і не блокують першу відрисовку -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Merriweather:ital,wght@0,400;1,400&display=swap" media="print" onload="this.media='all'">
+  <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&family=Merriweather:ital,wght@0,400;1,400&display=swap"></noscript>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/adaptive.css">
+  <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+  <style>
+    /* Внутрішня таблиця стилів: стилі, специфічні лише для головної сторінки */
+    .page-home .goal::before {
+      content: "👋 Вітаємо у SmartLine! ";
+      font-weight: 600;
+    }
+    .page-home #reviews blockquote + blockquote {
+      border-left-color: hsl(152, 60%, 30%);
+    }
+  </style>
+  <script src="js/script.js" defer></script>
+</head>
+<body class="page-home">
+
+  <header id="top" class="site-header">
+    <img class="logo" src="images/logo.svg" alt="Логотип SmartLine" width="80" height="80">
+    <h1>SmartLine</h1>
+    <p><i>Інтернет-магазин смартфонів</i></p>
+
+    <nav id="main-nav">
+      <ul>
+        <li><a href="catalog.html" title="Перейти до каталогу смартфонів" accesskey="k">Каталог</a></li>
+        <li><a href="#reviews" title="Перейти до розділу з відгуками">Відгуки про товар</a></li>
+        <li><a href="feedback.html" title="Написати нам">Зворотній зв'язок</a></li>
+      </ul>
+    </nav>
+
+    <button type="button" class="btn btn-ghost" title="Вхід до особистого кабінету">Перейти у власний кабінет</button>
+    <button type="button" class="btn btn-primary" title="Створити новий акаунт">Зареєструватись</button>
+  </header>
+  <script>
+    /* відступ під шапку виставляється до першої відрисовки, щоб уникнути зсуву макета (CLS) */
+    (function () {
+      var header = document.querySelector(".site-header");
+      var nav = document.getElementById("main-nav");
+      var narrow = Math.min(window.innerWidth, screen.width) <= 768;
+      nav.classList.add(narrow ? "nav--vertical" : "nav--horizontal");
+      header.classList.toggle("has-vertical-nav", narrow);
+      document.body.style.setProperty("--header-h", header.offsetHeight + "px");
+    })();
+  </script>
+
+
+  <main>
+
+    <article id="about" class="card">
+      <h2>Про наш магазин</h2>
+      <p class="goal">
+        <b>Мета</b> створення інтернет-магазину SmartLine — надати покупцям зручний
+        спосіб обрати та придбати сучасний смартфон за чесною ціною, з офіційною
+        гарантією та швидкою доставкою по всій Україні.
+      </p>
+
+      <h3>Завдання для досягнення мети</h3>
+      <ol type="i">
+        <li>Сформувати каталог оригінальних смартфонів від офіційних постачальників.</li>
+        <li>Надавати детальні характеристики та порівняння моделей.</li>
+        <li>Забезпечити швидку доставку та безпечну оплату.</li>
+        <li>Організувати сервісну підтримку та гарантійне обслуговування.</li>
+      </ol>
+
+      <p>
+        <span class="slogan">Кожен смартфон у нашому магазині</span>
+        <i>проходить перевірку</i> перед відправленням,
+        <b>має офіційну гарантію</b> та
+        <em>може бути повернений протягом 14 днів</em>, якщо він вам
+        <u>не підійшов</u>.
+      </p>
+    </article>
+
+    <section id="products" class="card">
+      <h2>Загальна інформація про товари</h2>
+
+      <table border="1" cellpadding="6">
+        <caption>Смартфони, що представлені в магазині SmartLine</caption>
+        <thead>
+          <tr>
+            <th rowspan="2">Категорія</th>
+            <th rowspan="2">Бренд</th>
+            <th colspan="2">Характеристики</th>
+            <th rowspan="2">Ціна, грн</th>
+            <th rowspan="2">Гарантія</th>
+          </tr>
+          <tr>
+            <th>Операційна система</th>
+            <th>Пам'ять</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td rowspan="3">Флагмани</td>
+            <td>Apple</td>
+            <td>iOS</td>
+            <td>256 ГБ – 1 ТБ</td>
+            <td>52 000 – 75 000</td>
+            <td rowspan="3">24 місяці</td>
+          </tr>
+          <tr>
+            <td>Samsung</td>
+            <td rowspan="5">Android</td>
+            <td>256 – 512 ГБ</td>
+            <td>40 000 – 60 000</td>
+          </tr>
+          <tr>
+            <td>Sony</td>
+            <td>256 ГБ</td>
+            <td>45 000 – 50 000</td>
+          </tr>
+          <tr>
+            <td rowspan="2">Середній клас</td>
+            <td>Google</td>
+            <td>128 – 256 ГБ</td>
+            <td>28 000 – 35 000</td>
+            <td rowspan="3">12 місяців</td>
+          </tr>
+          <tr>
+            <td>OnePlus</td>
+            <td>256 ГБ</td>
+            <td>25 000 – 32 000</td>
+          </tr>
+          <tr>
+            <td>Бюджетні</td>
+            <td>Xiaomi, Motorola, Nothing</td>
+            <td colspan="2">128 – 256 ГБ, від 9 000</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <th colspan="4">Усього моделей у каталозі</th>
+            <td colspan="2">8</td>
+          </tr>
+        </tfoot>
+      </table>
+    </section>
+
+    <section id="reviews" class="card">
+      <h2>Відгуки про товар</h2>
+      <blockquote>
+        <p>«Замовила Galaxy S25 — доставили наступного дня, все оригінальне. Дякую!»</p>
+        <p>— Олена, Київ</p>
+      </blockquote>
+      <blockquote>
+        <p>«Консультант допоміг обрати Pixel 9 замість дорожчої моделі. Рекомендую.»</p>
+        <p>— Андрій, Львів</p>
+      </blockquote>
+      <p hidden>Цей відгук очікує модерації.</p>
+    </section>
+
+  </main>
+
+  <aside>
+    <h2>Корисні посилання</h2>
+    <ul>
+      <li><a href="https://www.apple.com/ua/" target="_blank" rel="noopener noreferrer">Офіційний сайт Apple</a></li>
+      <li><a href="https://www.samsung.com/ua/" target="_blank" rel="noopener noreferrer">Офіційний сайт Samsung</a></li>
+    </ul>
+    <p data-promo="autumn-2026">Восени — знижка 10% на всі чохли при купівлі смартфона.</p>
+  </aside>
+
+  <footer id="contacts">
+    <h2>Контакти</h2>
+    <address tabindex="0" title="Виділіть текст адреси">
+      м. Київ, вул. Хрещатик, 22, офіс 5<br>
+      Телефон: <a href="tel:+380441234567">+38 (044) 123-45-67</a><br>
+      Телефон: <a href="tel:+380671234567">+38 (067) 123-45-67</a><br>
+      E-mail: <a href="mailto:info@smartline.ua">info@smartline.ua</a>
+    </address>
+    <p><a href="#top">Нагору &#8593;</a></p>
+    <p><small>&copy; 2026 SmartLine. Усі права захищено.</small></p>
+  </footer>
+
+</body>
+</html>

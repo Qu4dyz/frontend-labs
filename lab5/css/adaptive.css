@@ -1,0 +1,399 @@
+/* =========================================================
+   SmartLine — адаптивність та кросбраузерність (Лабораторна робота 5)
+   Підключається після style.css
+   ========================================================= */
+
+/* ---------- Нормалізація відмінностей браузерів (за підходом normalize.css) ---------- */
+html {
+  -webkit-text-size-adjust: 100%;      /* Safari iOS: не збільшувати текст при повороті */
+  -moz-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  margin: 0;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;          /* Safari: прибрати системний вигляд кнопок */
+  appearance: button;
+}
+
+[type="search"] {
+  -webkit-appearance: textfield;       /* Safari/Chrome: однаковий вигляд поля пошуку */
+  appearance: textfield;
+  outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, darkgreen 50%), linear-gradient(135deg, darkgreen 50%, transparent 50%);
+  background-position: calc(100% - 1.1rem) 50%, calc(100% - 0.75rem) 50%;
+  background-size: 0.35rem 0.35rem;
+  background-repeat: no-repeat;
+  padding-right: 2rem !important;
+}
+
+/* ---------- Гнучкі зображення та вбудований контент ---------- */
+img,
+picture,
+svg,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+.product img {
+  width: 100%;
+  max-width: 12.5rem;
+  height: auto;
+  aspect-ratio: 1 / 1;
+}
+
+#map iframe {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+
+/* ---------- Вендорні префікси для ефектів з ЛР2/ЛР4 ---------- */
+.site-header .logo {
+  -webkit-animation: logo-pop 1.2s ease-out both;
+  animation: logo-pop 1.2s ease-out both;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  transition: transform 0.4s ease;
+}
+
+.site-header .logo:hover {
+  -webkit-transform: rotate(-12deg) scale(1.08);
+  -ms-transform: rotate(-12deg) scale(1.08);
+  transform: rotate(-12deg) scale(1.08);
+}
+
+.btn:hover {
+  -webkit-transform: translateY(-2px);
+  -ms-transform: translateY(-2px);
+  transform: translateY(-2px);
+}
+
+#products:hover {
+  -webkit-transform: translateY(-2%);
+  -ms-transform: translateY(-2%);
+  transform: translateY(-2%);
+}
+
+.product img:hover {
+  -webkit-filter: sepia(1) contrast(0.9) brightness(0.95) blur(0.3px);
+  filter: sepia(1) contrast(0.9) brightness(0.95) blur(0.3px);
+  -webkit-animation: old-photo 1.2s ease;
+  animation: old-photo 1.2s ease;
+}
+
+@-webkit-keyframes logo-pop {
+  0%   { opacity: 0; -webkit-transform: scale(0.6) rotate(-30deg); }
+  70%  { opacity: 1; -webkit-transform: scale(1.1) rotate(5deg); }
+  100% { -webkit-transform: scale(1) rotate(0); }
+}
+
+@-webkit-keyframes old-photo {
+  0%   { -webkit-filter: none; }
+  50%  { -webkit-filter: sepia(0.6) grayscale(0.3); }
+  100% { -webkit-filter: sepia(1) contrast(0.9) brightness(0.95) blur(0.3px); }
+}
+
+.new-badge {
+  -webkit-transform: scaleX(1.2);
+  -ms-transform: scaleX(1.2);
+  transform: scaleX(1.2);
+}
+
+.feedback-form textarea.is-hovered {
+  -webkit-box-shadow: 0 4px 0.875rem rgba(0, 100, 0, 0.3);
+  box-shadow: 0 4px 0.875rem rgba(0, 100, 0, 0.3);
+}
+
+/* смуга прокручування блоку #about: Firefox — scrollbar-color (style.css), Chrome/Edge/Safari/Opera — ::-webkit-scrollbar */
+#about::-webkit-scrollbar {
+  width: 0.5rem;
+}
+
+#about::-webkit-scrollbar-thumb {
+  background: darkgreen;
+  border-radius: 999px;
+}
+
+#about::-webkit-scrollbar-track {
+  background: hsl(150, 30%, 92%);
+}
+
+::-moz-selection {
+  background: hsl(48, 100%, 70%);
+  color: #111827;
+}
+
+#about,
+.feedback-form textarea {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* ---------- Відступи під шапки (висоту вимірює скрипт, змінна --header-h) ---------- */
+.page-home {
+  padding-top: calc(var(--header-h, 14.375rem) + 1rem);
+}
+
+.page-catalog {
+  padding-top: var(--header-h, 5.875rem) !important;
+}
+
+/* таблиця на вузьких екранах прокручується всередині свого блоку, а не всю сторінку */
+#products {
+  overflow-x: auto;
+}
+
+/* ================= Брейкпоінти ================= */
+
+/* Ноутбуки 1366 і менше */
+@media only screen and (max-width: 1366px) {
+  .page-home {
+    column-gap: 1.5rem;
+  }
+}
+
+/* Планшети альбомні 1024 і менше: бічна панель під основним вмістом */
+@media only screen and (max-width: 1024px) {
+  .page-home {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "main"
+      "aside"
+      "footer";
+  }
+
+  .page-home aside {
+    position: static;
+    margin-bottom: 2rem;
+  }
+
+  .products {
+    grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  }
+}
+
+/* Планшети книжкові 768 і менше */
+@media only screen and (max-width: 768px) {
+  body {
+    font-size: 0.9375rem;
+  }
+
+  .page-home {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .page-home footer {
+    margin: 0 -1rem;
+    padding: 1.5rem 1rem;
+  }
+
+  .site-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .page-home .site-header.has-vertical-nav {
+    padding-right: 13rem;
+  }
+
+  #about,
+  #products,
+  #reviews {
+    padding: 0.75rem 1rem;
+  }
+
+  #products table {
+    font-size: 0.8125rem;
+  }
+
+  .site-header--fixed {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "logo title"
+      "logo nav";
+  }
+
+  .site-header--fixed form {
+    display: none;                    /* кнопка «На Головну» доступна у підвалі сторінки */
+  }
+
+  .page-catalog main {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .search input {
+    min-width: 0;
+    flex: 1 1 100%;
+  }
+
+  .details-wrapper {
+    flex-direction: column;
+  }
+
+  .tooltip {
+    flex-basis: auto;
+    -webkit-transform: translateY(-0.5rem);
+    transform: translateY(-0.5rem);
+  }
+
+  .tooltip::before {
+    left: 1.5rem;
+    top: -0.5rem;
+    border: 0.5rem solid transparent;
+    border-top: 0;
+    border-bottom-color: darkgreen;
+  }
+
+  .tooltip.visible {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+  }
+}
+
+/* Смартфони 600 і менше */
+@media only screen and (max-width: 600px) {
+  .site-header h1 {
+    font-size: 1.625rem;
+  }
+
+  .site-header .logo {
+    width: 3.5rem;
+    height: 3.5rem;
+  }
+
+  .page-home .site-header.has-vertical-nav {
+    padding-right: 1rem;
+    padding-top: 0.75rem;
+  }
+
+  /* на смартфоні вертикальне меню праворуч під логотипом, кнопки — на всю ширину */
+  .page-home #main-nav.nav--vertical {
+    position: static;
+    float: right;
+    margin: 0 0 0.5rem 0.5rem;
+  }
+
+  .page-home .site-header > .btn {
+    display: block;
+    width: 100%;
+    margin: 0.5rem 0 0;
+    clear: both;
+  }
+
+  #about {
+    margin: 1.5rem 0;
+    max-height: 25rem;
+  }
+
+  .catalog-nav {
+    flex-wrap: wrap;
+    gap: 0.25rem 1rem;
+  }
+
+  .site-header--fixed h1 {
+    font-size: 1.375rem;
+  }
+
+  .site-header--fixed .logo {
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .feedback-form {
+    padding: 1rem;
+  }
+
+  .feedback-form fieldset {
+    padding: 0.5rem 0.75rem 0.75rem;
+  }
+
+  .feedback-form fieldset > p {
+    flex-basis: 100%;
+  }
+
+  .actions {
+    flex: 1 1 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .actions .btn {
+    flex: 1 1 8rem;
+    margin: 0;
+  }
+
+  .page-feedback main {
+    padding: 0 0.75rem;
+  }
+}
+
+/* Малі смартфони 360 і менше */
+@media only screen and (max-width: 360px) {
+  body {
+    font-size: 0.875rem;
+  }
+
+  .page-home {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  .page-home footer {
+    margin: 0 -0.5rem;
+  }
+
+  #products th,
+  #products td {
+    padding: 0.25rem 0.375rem;
+  }
+
+  .catalog-nav a {
+    font-size: 0.875rem;
+  }
+}
+
+/* Друк: без анімацій та фіксованих елементів */
+@media print {
+  .falling-layer,
+  .site-header .btn,
+  #map {
+    display: none;
+  }
+
+  .site-header,
+  .site-header--fixed {
+    position: static !important;
+  }
+
+  .page-home,
+  .page-catalog {
+    padding-top: 0 !important;
+    display: block;
+  }
+}
